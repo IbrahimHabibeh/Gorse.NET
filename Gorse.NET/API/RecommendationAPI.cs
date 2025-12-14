@@ -3,16 +3,16 @@ using RestSharp;
 
 namespace Gorse.NET;
 
-public partial class Gorse
+public partial class GorseClient
 {
-    public string[]? GetRecommend(string userId)
+    public string[]? GetRecommend(string userId, int? n = 10)
     {
-        return _client.Request<string[], Object>(Method.Get, "api/recommend/" + userId, null);
+        return _client.Request<string[], Object>(Method.Get, $"api/recommend/{userId}?n={n}", null);
     }
 
-    public Task<string[]?> GetRecommendAsync(string userId)
+    public Task<string[]?> GetRecommendAsync(string userId, int? n = 10)
     {
-        return _client.RequestAsync<string[], Object>(Method.Get, "api/recommend/" + userId, null);
+        return _client.RequestAsync<string[], Object>(Method.Get, $"api/recommend/{userId}?n={n}", null);
     }
 
     public List<UserScore> GetUserNeighbors(string userId, int n = 100, int offset = 0)

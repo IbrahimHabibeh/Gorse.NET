@@ -4,16 +4,16 @@ using RestSharp;
 
 namespace Gorse.NET;
 
-public partial class Gorse
+public partial class GorseClient
 {
     public Result InsertFeedback(Feedback[] feedbacks)
     {
         return _client.Request<Result, Feedback[]>(Method.Post, "api/feedback", feedbacks)!;
     }
 
-    public Task<Result> InsertFeedbackAsync(Feedback[] feedbacks)
+    public Task<Result> InsertFeedbackAsync(List<Feedback> feedbacks)
     {
-        return _client.RequestAsync<Result, Feedback[]>(Method.Post, "api/feedback", feedbacks)!;
+        return _client.RequestAsync<Result, List<Feedback>>(Method.Post, "api/feedback", feedbacks)!;
     }
 
     public FeedbacksResponse GetFeedbacks(int n = 10, string cursor = "")

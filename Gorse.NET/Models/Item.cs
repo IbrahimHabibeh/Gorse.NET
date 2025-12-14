@@ -7,5 +7,5 @@ public class Item
     public string Comment { get; set; } = "";
     public bool IsHidden { get; set; }
     public string[] Labels { set; get; } = Array.Empty<string>();
-    public DateTime TimeStamp { get; set; } = DateTime.UtcNow;
+    public DateTime Timestamp { get; set; } = DateTime.UtcNow;
 }

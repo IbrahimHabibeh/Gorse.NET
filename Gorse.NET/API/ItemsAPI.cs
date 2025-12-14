@@ -3,7 +3,7 @@ using RestSharp;
 
 namespace Gorse.NET;
 
-public partial class Gorse
+public partial class GorseClient
 {
     public Result InsertItem(Item item)
     {
