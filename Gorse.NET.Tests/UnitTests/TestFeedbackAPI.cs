@@ -15,7 +15,7 @@ public partial class Tests
                 UserId = "2000",
                 ItemId = "1",
                 Value = 1.0,
-                Timestamp = DateTime.UtcNow.ToString("o"),
+                Timestamp = DateTime.UtcNow,
             },
             new Feedback
             {
@@ -23,7 +23,7 @@ public partial class Tests
                 UserId = "2000",
                 ItemId = "1060",
                 Value = 2.0,
-                Timestamp = DateTime.UtcNow.ToString("o"),
+                Timestamp = DateTime.UtcNow,
             },
             new Feedback
             {
@@ -31,7 +31,7 @@ public partial class Tests
                 UserId = "2000",
                 ItemId = "11",
                 Value = 3.0,
-                Timestamp = DateTime.UtcNow.ToString("o"),
+                Timestamp = DateTime.UtcNow,
             },
         };
         foreach (var fb in feedbacks)
@@ -45,7 +45,7 @@ public partial class Tests
     [Test]
     public async Task TestFeedbackAsync()
     {
-        var feedbacks = new Feedback[]
+        var feedbacks = new List<Feedback>
         {
             new Feedback
             {
@@ -53,7 +53,7 @@ public partial class Tests
                 UserId = "2000",
                 ItemId = "1",
                 Value = 1.0,
-                Timestamp = DateTime.UtcNow.ToString("o"),
+                Timestamp = DateTime.UtcNow,
             },
             new Feedback
             {
@@ -61,7 +61,7 @@ public partial class Tests
                 UserId = "2000",
                 ItemId = "1060",
                 Value = 2.0,
-                Timestamp = DateTime.UtcNow.ToString("o"),
+                Timestamp = DateTime.UtcNow,
             },
             new Feedback
             {
@@ -69,7 +69,7 @@ public partial class Tests
                 UserId = "2000",
                 ItemId = "11",
                 Value = 3.0,
-                Timestamp = DateTime.UtcNow.ToString("o"),
+                Timestamp = DateTime.UtcNow,
             },
         };
         foreach (var fb in feedbacks)

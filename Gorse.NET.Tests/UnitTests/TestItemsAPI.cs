@@ -17,7 +17,7 @@ public partial class Tests
                 { "embedding", new List<double> { 0.1, 0.2, 0.3 } }
             },
             Categories = new[] { "Comedy", "Animation" },
-            TimeStamp = DateTime.UtcNow,
+            Timestamp = DateTime.UtcNow,
             Comment = "Minions (2015)",
         };
         var rowAffected = client.InsertItem(item);
@@ -54,7 +54,7 @@ public partial class Tests
                 { "embedding", new List<double> { 0.1, 0.2, 0.3 } }
             },
             Categories = new[] { "Comedy", "Animation" },
-            TimeStamp = DateTime.UtcNow,
+            Timestamp = DateTime.UtcNow,
             Comment = "Minions (2015)",
         };
         var rowAffected = await client.InsertItemAsync(item);
