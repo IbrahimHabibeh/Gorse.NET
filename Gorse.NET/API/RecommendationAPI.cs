@@ -24,4 +24,9 @@ public partial class GorseClient
     {
         return _client.RequestAsync<List<UserScore>, object>(Method.Get, $"api/user/{userId}/neighbors?n={n}&offset={offset}", null)!;
     }
+
+    public Task<List<UserScore>> GetRecommendLatestAsync(int? n = 10)
+    {
+        return _client.RequestAsync<List<UserScore>, object>(Method.Get, $"api/latest?n={n}", null)!;
+    }
 }
