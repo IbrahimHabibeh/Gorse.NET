@@ -1,4 +1,5 @@
 
+
 using Gorse.NET.Models;
 using RestSharp;
 
@@ -6,14 +7,40 @@ namespace Gorse.NET;
 
 public partial class GorseClient
 {
+    /// <summary>
+    /// Insert feedback. Duplicate feedback will have their values summed.
+    /// Use UpsertFeedbackAsync for overwrite semantics.
+    /// </summary>
     public Result InsertFeedback(Feedback[] feedbacks)
     {
         return _client.Request<Result, Feedback[]>(Method.Post, "api/feedback", feedbacks)!;
     }
 
+    /// <summary>
+    /// Insert feedback. Duplicate feedback will have their values summed.
+    /// Use UpsertFeedbackAsync for overwrite semantics.
+    /// </summary>
     public Task<Result> InsertFeedbackAsync(List<Feedback> feedbacks)
     {
         return _client.RequestAsync<Result, List<Feedback>>(Method.Post, "api/feedback", feedbacks)!;
+    }
+
+    /// <summary>
+    /// Upsert feedback. Duplicate feedback will be overwritten (not summed).
+    /// Use InsertFeedbackAsync for additive/sum semantics.
+    /// </summary>
+    public Result UpsertFeedback(Feedback[] feedbacks)
+    {
+        return _client.Request<Result, Feedback[]>(Method.Put, "api/feedback", feedbacks)!;
+    }
+
+    /// <summary>
+    /// Upsert feedback. Duplicate feedback will be overwritten (not summed).
+    /// Use InsertFeedbackAsync for additive/sum semantics.
+    /// </summary>
+    public Task<Result> UpsertFeedbackAsync(List<Feedback> feedbacks)
+    {
+        return _client.RequestAsync<Result, List<Feedback>>(Method.Put, "api/feedback", feedbacks)!;
     }
 
     public FeedbacksResponse GetFeedbacks(int n = 10, string cursor = "")
