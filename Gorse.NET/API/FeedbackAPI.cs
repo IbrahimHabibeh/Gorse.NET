@@ -9,7 +9,7 @@ public partial class Gorse
 {
     /// <summary>
     /// Insert feedback. Duplicate feedback will have their values summed.
-    /// Use UpsertFeedbackAsync for overwrite semantics.
+    /// Use <see cref="UpsertFeedback(IEnumerable{Feedback})"/> for overwrite semantics.
     /// </summary>
     public Result InsertFeedback(IEnumerable<Feedback> feedbacks)
     {
@@ -18,7 +18,7 @@ public partial class Gorse
 
     /// <summary>
     /// Insert feedback. Duplicate feedback will have their values summed.
-    /// Use UpsertFeedbackAsync for overwrite semantics.
+    /// Use <see cref="UpsertFeedbackAsync(IEnumerable{Feedback})"/> for overwrite semantics.
     /// </summary>
     public Task<Result> InsertFeedbackAsync(IEnumerable<Feedback> feedbacks)
     {
@@ -27,7 +27,7 @@ public partial class Gorse
 
     /// <summary>
     /// Upsert feedback. Duplicate feedback will be overwritten (not summed).
-    /// Use InsertFeedbackAsync for additive/sum semantics.
+    /// Use <see cref="InsertFeedback(IEnumerable{Feedback})"/> for additive/sum semantics.
     /// </summary>
     public Result UpsertFeedback(IEnumerable<Feedback> feedbacks)
     {
@@ -36,7 +36,7 @@ public partial class Gorse
 
     /// <summary>
     /// Upsert feedback. Duplicate feedback will be overwritten (not summed).
-    /// Use InsertFeedbackAsync for additive/sum semantics.
+    /// Use <see cref="InsertFeedbackAsync(IEnumerable{Feedback})"/> for additive/sum semantics.
     /// </summary>
     public Task<Result> UpsertFeedbackAsync(IEnumerable<Feedback> feedbacks)
     {
