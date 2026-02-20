@@ -15,14 +15,14 @@ public partial class Gorse
         return _client.RequestAsync<Result, User>(Method.Post, "api/user", user)!;
     }
 
-    public Result InsertUsers(List<User> users)
+    public Result InsertUsers(IEnumerable<User> users)
     {
-        return _client.Request<Result, List<User>>(Method.Post, "api/users", users)!;
+        return _client.Request<Result, IEnumerable<User>>(Method.Post, "api/users", users)!;
     }
 
-    public Task<Result> InsertUsersAsync(List<User> users)
+    public Task<Result> InsertUsersAsync(IEnumerable<User> users)
     {
-        return _client.RequestAsync<Result, List<User>>(Method.Post, "api/users", users)!;
+        return _client.RequestAsync<Result, IEnumerable<User>>(Method.Post, "api/users", users)!;
     }
 
     public User GetUser(string userId)
