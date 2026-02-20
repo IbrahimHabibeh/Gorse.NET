@@ -3,7 +3,7 @@ using RestSharp;
 
 namespace Gorse.NET;
 
-public partial class GorseClient
+public partial class Gorse
 {
     public string[]? GetRecommend(string userId, int? n = 10)
     {

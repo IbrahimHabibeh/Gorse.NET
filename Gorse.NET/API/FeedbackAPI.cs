@@ -5,7 +5,7 @@ using RestSharp;
 
 namespace Gorse.NET;
 
-public partial class GorseClient
+public partial class Gorse
 {
     /// <summary>
     /// Insert feedback. Duplicate feedback will have their values summed.
