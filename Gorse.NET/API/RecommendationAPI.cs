@@ -25,6 +25,11 @@ public partial class Gorse
         return _client.RequestAsync<List<UserScore>, object>(Method.Get, $"api/user/{userId}/neighbors?n={n}&offset={offset}", null)!;
     }
 
+    public Task<List<UserScore>> GetItemNeighborsAsync(string itemId, int n = 12, int offset = 0, string recommender = "neighbors")
+    {
+        return _client.RequestAsync<List<UserScore>, object>(Method.Get, $"api/item-to-item/{recommender}/{itemId}?n={n}&offset={offset}", null)!;
+    }
+
     public Task<List<UserScore>> GetRecommendLatestAsync(int n = 10)
     {
         return _client.RequestAsync<List<UserScore>, object>(Method.Get, $"api/latest?n={n}", null)!;
