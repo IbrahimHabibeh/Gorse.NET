@@ -1,0 +1,15 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "main",
+    "upstream-sync-and-cleanup"
+  ],
+  "parent": {
+    "main": null,
+    "upstream-sync-and-cleanup": "main"
+  },
+  "order": [
+    "main",
+    "upstream-sync-and-cleanup"
+  ]
+}

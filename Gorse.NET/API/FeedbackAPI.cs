@@ -71,13 +71,13 @@ public partial class Gorse
     /// <summary>All feedback types recorded between one user and one item.</summary>
     public List<Feedback> GetUserItemFeedbacks(string userId, string itemId)
     {
-        return _client.Request<List<Feedback>, object>(Method.Get, $"api/feedback/{Seg(userId)}/{Seg(itemId)}", null)!;
+        return _client.Request<List<Feedback>, object>(Method.Get, $"api/feedback/{Seg(userId)}/{Seg(itemId)}", null) ?? [];
     }
 
     /// <inheritdoc cref="GetUserItemFeedbacks"/>
     public Task<List<Feedback>> GetUserItemFeedbacksAsync(string userId, string itemId, CancellationToken cancellationToken = default)
     {
-        return _client.RequestAsync<List<Feedback>, object>(Method.Get, $"api/feedback/{Seg(userId)}/{Seg(itemId)}", null, cancellationToken)!;
+        return OrEmpty(_client.RequestAsync<List<Feedback>, object>(Method.Get, $"api/feedback/{Seg(userId)}/{Seg(itemId)}", null, cancellationToken));
     }
 
     public Result DeleteUserItemFeedbacks(string userId, string itemId)

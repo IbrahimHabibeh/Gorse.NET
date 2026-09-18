@@ -48,14 +48,14 @@ public partial class Gorse
     public List<UserScore> GetUserNeighbors(string userId, int n = 100, int offset = 0)
     {
         return _client.Request<List<UserScore>, object>(Method.Get,
-            $"api/user/{Seg(userId)}/neighbors" + ScoreQuery(n, offset), null)!;
+            $"api/user/{Seg(userId)}/neighbors" + ScoreQuery(n, offset), null) ?? [];
     }
 
     public Task<List<UserScore>> GetUserNeighborsAsync(string userId, int n = 100, int offset = 0,
         CancellationToken cancellationToken = default)
     {
-        return _client.RequestAsync<List<UserScore>, object>(Method.Get,
-            $"api/user/{Seg(userId)}/neighbors" + ScoreQuery(n, offset), null, cancellationToken)!;
+        return OrEmpty(_client.RequestAsync<List<UserScore>, object>(Method.Get,
+            $"api/user/{Seg(userId)}/neighbors" + ScoreQuery(n, offset), null, cancellationToken));
     }
 
     /// <summary>
@@ -73,9 +73,9 @@ public partial class Gorse
         string? userId = null,
         CancellationToken cancellationToken = default)
     {
-        return _client.RequestAsync<List<UserScore>, object>(Method.Get,
+        return OrEmpty(_client.RequestAsync<List<UserScore>, object>(Method.Get,
             $"api/item-to-item/{Seg(recommender)}/{Seg(itemId)}" + ScoreQuery(n, offset, category, userId),
-            null, cancellationToken)!;
+            null, cancellationToken));
     }
 
     public Task<List<UserScore>> GetRecommendLatestAsync(
@@ -85,8 +85,8 @@ public partial class Gorse
         string? userId = null,
         CancellationToken cancellationToken = default)
     {
-        return _client.RequestAsync<List<UserScore>, object>(Method.Get,
-            "api/latest" + ScoreQuery(n, offset, category, userId), null, cancellationToken)!;
+        return OrEmpty(_client.RequestAsync<List<UserScore>, object>(Method.Get,
+            "api/latest" + ScoreQuery(n, offset, category, userId), null, cancellationToken));
     }
 
     public Task<List<UserScore>> GetCollaborativeFilteringAsync(
@@ -97,9 +97,9 @@ public partial class Gorse
         string? removeReadUserId = null,
         CancellationToken cancellationToken = default)
     {
-        return _client.RequestAsync<List<UserScore>, object>(Method.Get,
+        return OrEmpty(_client.RequestAsync<List<UserScore>, object>(Method.Get,
             $"api/collaborative-filtering/{Seg(userId)}" + ScoreQuery(n, offset, category, removeReadUserId),
-            null, cancellationToken)!;
+            null, cancellationToken));
     }
 
     public Task<List<UserScore>> GetUserToUserAsync(
@@ -109,8 +109,8 @@ public partial class Gorse
         int offset = 0,
         CancellationToken cancellationToken = default)
     {
-        return _client.RequestAsync<List<UserScore>, object>(Method.Get,
-            $"api/user-to-user/{Seg(name)}/{Seg(userId)}" + ScoreQuery(n, offset), null, cancellationToken)!;
+        return OrEmpty(_client.RequestAsync<List<UserScore>, object>(Method.Get,
+            $"api/user-to-user/{Seg(name)}/{Seg(userId)}" + ScoreQuery(n, offset), null, cancellationToken));
     }
 
     public Task<List<UserScore>> GetNonPersonalizedAsync(
@@ -120,9 +120,9 @@ public partial class Gorse
         string? removeReadUserId = null,
         CancellationToken cancellationToken = default)
     {
-        return _client.RequestAsync<List<UserScore>, object>(Method.Get,
+        return OrEmpty(_client.RequestAsync<List<UserScore>, object>(Method.Get,
             $"api/non-personalized/{Seg(name)}" + ScoreQuery(n, offset, userId: removeReadUserId),
-            null, cancellationToken)!;
+            null, cancellationToken));
     }
 
     private static string ScoreQuery(int n, int offset = 0, string? category = null, string? userId = null) =>

@@ -106,6 +106,7 @@ health additions are asynchronous only.
 - `Gorse` is `IDisposable`, accepts a request timeout or a caller-owned `HttpClient`.
 - Path segments and query values are escaped everywhere.
 - Transport failures report their cause instead of an empty message.
+- List endpoints return an empty list when Gorse answers `null` for "no results".
 - `GetUserItemFeedbacks` calls `api/feedback/{user-id}/{item-id}` and returns `List<Feedback>`.
   Upstream sends the ids as query parameters, which Gorse ignores, so it returned unrelated feedback.
 - `Item.Labels` and `User.Labels` are `object?` so label objects (embeddings, nested labels) round-trip.
@@ -125,6 +126,14 @@ dotnet test
 ```bash
 curl -sL https://raw.githubusercontent.com/gorse-io/gorse/refs/heads/master/client/setup-test.sh | bash
 GORSE_TEST_ENDPOINT=http://127.0.0.1:8088 dotnet test
+```
+
+`ForkIntegrationTests` cover the VideoHub Gorse fork endpoints (label patch, immediate neighbors,
+`ItemPatch`, readiness) and run only when `GORSE_FORK_TEST_ENDPOINT` points at a fork server with
+`[videohub] label_patch` and `incremental_item_to_item` enabled, for example VideoHub's compose stack:
+
+```bash
+GORSE_FORK_TEST_ENDPOINT=http://localhost:8088 dotnet test
 ```
 
 ## Syncing with upstream
