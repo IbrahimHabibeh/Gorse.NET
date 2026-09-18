@@ -1,5 +1,3 @@
-using System.Text.Json;
-
 namespace Gorse.NET.Models;
 
 public class User

@@ -2,25 +2,27 @@ name: CI
 
 on:
   push:
-    branches:    
+    branches:
       - main
   pull_request:
-    branches:    
+    branches:
       - main
 
 jobs:
-  unit-test:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup test
+      - uses: actions/checkout@v4
+      - name: Start Gorse with the upstream test data
         run: curl -sL https://raw.githubusercontent.com/gorse-io/gorse/refs/heads/master/client/setup-test.sh | bash
       - uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '10.0.x'
       - name: Install dependencies
         run: dotnet restore
       - name: Build
         run: dotnet build --configuration Release --no-restore
       - name: Test
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test --configuration Release --no-build --verbosity normal
+        env:
+          GORSE_TEST_ENDPOINT: http://127.0.0.1:8088
