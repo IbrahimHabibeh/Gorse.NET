@@ -8,6 +8,10 @@ public partial class Tests
     [Test]
     public void TestItems()
     {
+        var searchResult = client.SearchItems("Toy Story", 3);
+        Assert.That(searchResult.Items, Is.Not.Empty);
+        Assert.That(searchResult.Items[0].Comment, Is.EqualTo("Toy Story (1995)"));
+
         var item = new Item
         {
             ItemId = "2000",
@@ -45,6 +49,10 @@ public partial class Tests
     [Test]
     public async Task TestItemsAsync()
     {
+        var searchResult = await client.SearchItemsAsync("Toy Story", 3);
+        Assert.That(searchResult.Items, Is.Not.Empty);
+        Assert.That(searchResult.Items[0].Comment, Is.EqualTo("Toy Story (1995)"));
+
         var item = new Item
         {
             ItemId = "2000",
