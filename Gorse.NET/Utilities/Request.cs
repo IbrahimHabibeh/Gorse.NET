@@ -12,10 +12,22 @@ public class RequestClient
 
     public RetType? Request<RetType, ReqType>(Method method, string resource, ReqType? req) where ReqType : class
     {
+        return RequestWithHeaders<RetType, ReqType>(method, resource, req, null);
+    }
+
+    public RetType? RequestWithHeaders<RetType, ReqType>(Method method, string resource, ReqType? req, Dictionary<string, string>? headers) where ReqType : class
+    {
         var request = new RestRequest(resource, method);
         if (req != null)
         {
             request.AddJsonBody(req);
+        }
+        if (headers != null)
+        {
+            foreach (var header in headers)
+            {
+                request.AddHeader(header.Key, header.Value);
+            }
         }
         var response = _client.Execute(request);
         if (!response.IsSuccessStatusCode)
@@ -50,10 +62,22 @@ public class RequestClient
 
     public async Task<RetType?> RequestAsync<RetType, ReqType>(Method method, string resource, ReqType? req) where ReqType : class
     {
+        return await RequestWithHeadersAsync<RetType, ReqType>(method, resource, req, null);
+    }
+
+    public async Task<RetType?> RequestWithHeadersAsync<RetType, ReqType>(Method method, string resource, ReqType? req, Dictionary<string, string>? headers) where ReqType : class
+    {
         var request = new RestRequest(resource, method);
         if (req != null)
         {
             request.AddJsonBody(req);
+        }
+        if (headers != null)
+        {
+            foreach (var header in headers)
+            {
+                request.AddHeader(header.Key, header.Value);
+            }
         }
         var response = await _client.ExecuteAsync(request);
         if (!response.IsSuccessStatusCode)

@@ -45,6 +45,16 @@ public partial class Gorse
         return _client.RequestAsync<ItemsResponse, Object>(Method.Get, $"api/items?n={n}&cursor={cursor}", null)!;
     }
 
+    public ItemsResponse SearchItems(string query, int n)
+    {
+        return _client.Request<ItemsResponse, Object>(Method.Get, $"api/items?q={Uri.EscapeDataString(query)}&n={n}", null)!;
+    }
+
+    public Task<ItemsResponse> SearchItemsAsync(string query, int n)
+    {
+        return _client.RequestAsync<ItemsResponse, Object>(Method.Get, $"api/items?q={Uri.EscapeDataString(query)}&n={n}", null)!;
+    }
+
     public Result DeleteItem(string itemId)
     {
         return _client.Request<Result, Object>(Method.Delete, "api/item/" + itemId, null)!;
