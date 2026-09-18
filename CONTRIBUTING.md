@@ -10,7 +10,7 @@ Reading and following these guidelines will help us make the contribution proces
 
 These following installations are required:
 
-- **.NET 6.0 SDK**: The required .NET SDK version for Gorse.NET is 6.0. Visual Studio or Visual Studio Code is recommended as the IDE.
+- **.NET 10 SDK**: The required .NET SDK version for Gorse.NET is 10.0. Visual Studio or Visual Studio Code is recommended as the IDE.
 - **Docker Compose**: Start a local Gorse cluster for testing.
 
 ```bash
@@ -20,7 +20,10 @@ curl -sL https://raw.githubusercontent.com/gorse-io/gorse/refs/heads/master/clie
 ### Run Unit Tests
 
 ```bash
+# offline tests only
 dotnet test
+# including the integration tests against the local Gorse cluster
+GORSE_TEST_ENDPOINT=http://127.0.0.1:8088 dotnet test
 ```
 
 ## Your First Contribution
