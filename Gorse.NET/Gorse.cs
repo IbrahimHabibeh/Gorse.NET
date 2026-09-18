@@ -46,6 +46,10 @@ public partial class Gorse : IDisposable
         GC.SuppressFinalize(this);
     }
 
+    /// <summary>Gorse serializes an empty result as JSON null; list endpoints return an empty list instead.</summary>
+    private static async Task<List<T>> OrEmpty<T>(Task<List<T>?> request) =>
+        await request.ConfigureAwait(false) ?? [];
+
     /// <summary>Escapes one path segment (ids, recommender names, feedback types).</summary>
     private static string Seg(string value) => Uri.EscapeDataString(value);
 

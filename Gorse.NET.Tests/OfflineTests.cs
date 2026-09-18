@@ -184,6 +184,18 @@ public class OfflineTests
     }
 
     [Test]
+    public async Task EmptyListResponsesBecomeEmptyLists()
+    {
+        // Gorse marshals an empty Go slice as JSON null.
+        handler.ResponseBody = "null";
+
+        Assert.That(await client.GetItemNeighborsAsync("a"), Is.Empty);
+        Assert.That(await client.GetRecommendLatestAsync(), Is.Empty);
+        Assert.That(client.GetUserNeighbors("u"), Is.Empty);
+        Assert.That(await client.GetUserItemFeedbacksAsync("u", "i"), Is.Empty);
+    }
+
+    [Test]
     public async Task ReadinessIsDeserialized()
     {
         handler.ResponseBody = "{\"Ready\":true,\"DataStoreError\":null,\"CacheStoreError\":null,\"DataStoreConnected\":true,\"CacheStoreConnected\":true}";
